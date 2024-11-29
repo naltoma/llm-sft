@@ -1,0 +1,24 @@
+# Definition file for llama-facotry: https://github.com/hiyouga/LLaMA-Factory
+# - base docker image: ubuntu:24.04
+# - install latest stable python3, git & related tools: https://www.python.jp/install/ubuntu/index.html
+#   - installed to /usr/bin/python3
+# - install llama-factory
+#   - copy the repository to /LLaMA-Factory
+#   - installed to /usr/local/bin/llamafactory-cli
+
+BootStrap: docker
+From: ubuntu:24.04
+
+%post
+    apt-get update
+    apt-get install -y build-essential libbz2-dev libdb-dev \
+        libreadline-dev libffi-dev libgdbm-dev liblzma-dev \
+        libncursesw5-dev libsqlite3-dev libssl-dev \
+        zlib1g-dev uuid-dev tk-dev
+    apt-get install -y git
+    apt-get install -y python3 python3-pip # => 3.12
+    #pip install --upgrade pip #--break-system-packages # doesn't work
+    git clone --depth 1 https://github.com/hiyouga/LLaMA-Factory.git
+    cd LLaMA-Factory
+    pip install -e ".[torch,metrics]" --break-system-packages
+    pip install wandb --break-system-packages
