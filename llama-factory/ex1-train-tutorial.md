@@ -99,8 +99,6 @@ tail -f logs/llama3_lora_sft.yaml-JOBID.out
 ### 実行結果（精製されるファイル一覧）
 正常終了すると、yamlで指定した出力先（今回は LLaMA-Factory/save/llama3-8b/llora/sft-wmt）に実行結果が保存される。
 
- llama-facotryでsftすると、以下のファイルが保存されました。それぞれ何を保存しているのか説明してください。
-
 - `README.md`: サマリ。base_model, 学習オプション, データセット, 最終loss, ライブラリのバージョン等が記入されている。
 - `adapter_config.json`: アダプター層（LoRA, QLoRA等）の設定ファイル。
 - `adapter_model.safetensors`: アダプター層の学習済み重みを保存したファイル。
