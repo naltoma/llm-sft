@@ -25,7 +25,7 @@ LLaMA-Factory/examples/train_lora/llama3_lora_predict.yaml を複製して、オ
 14c14
 < max_samples: 50
 ---
-> max_samples: -1
+> max_samples: 10000
 19c19
 < output_dir: saves/llama3-8b/lora/predict
 ---
@@ -38,6 +38,9 @@ SFTとの違いという点では、以下の点が大切なようです。
 - eval_dataset: wmttest2023.ja-en.all
 - per_device_eval_batch_size: 1
 - predict_with_generate: true
+- 💡 **Tips**
+  - `max_samples`については、-1とすると全サンプルになった気がするのだけど、今はダメな模様。実サンプル数より大きなサイズを指定しておけば、全サンプルを利用してくれます。
+    - 参考: [data/loader.py:_load_single_dataset()](https://github.com/hiyouga/LLaMA-Factory/blob/581392fdd1d7aca39558e817350a90e7392162a8/src/llamafactory/data/loader.py#L148)
 
 ### step 3: ジョブ投入用ファイルの作成
 - 参考: [llamafactory-lora-predict-wmt.sbatch](./llamafactory-lora-predict-wmt.sbatch)
